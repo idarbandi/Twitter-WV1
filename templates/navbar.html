@@ -13,6 +13,13 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'profile' request.user.id %}">My Profile</a>
         </li>
+        <li class="nav-item">
+          <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a href="{% url 'login' %}" class="nav-link">Login</a>
+        </li>
         {% endif %}
       </ul>
       <form class="d-flex" role="search">

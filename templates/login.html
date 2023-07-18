@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+   {% if request.user.is_authenticated %}
+      Youre Already Logged In
+   {% else %}
+     <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="text" class="form-control" name="username" placeholder="Enter Your User Name">
+    <div id="emailHelp" class="form-text">We'll never share your User Name with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Enter Your Password">
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+      <br>
+  <button type="submit" class="btn btn-secondary">Submit</button>
+</form>
+   {% endif %}
+{% endblock %}
