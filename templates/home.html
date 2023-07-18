@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-     Hello World
+     {% for tweet in tweets %}
+         <div class="alert alert-dark" role="alert">
+             {{ tweet }}
+         </div><br><br>
+     {% endfor %}
 {% endblock %}

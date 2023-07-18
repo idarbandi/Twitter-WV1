@@ -3,7 +3,17 @@
 {% if profile %}
 <div class="container text-center">
     <div class="row">
-        <div class="col-8"> <h1>{{ profile }}'s Profile</h1></div>
+        <div class="col-8"> <h1>{{ profile }}'s Profile</h1>
+            <br>
+            {% if tweets %}
+              {% for tweet in tweets %}
+         <div class="alert alert-dark" role="alert">
+             {{ tweet }}
+         </div><br><br>
+     {% endfor %}
+
+            {% endif %}
+        </div>
         <div class="col-4">
         <div class="card">
   <div class="card-header">
