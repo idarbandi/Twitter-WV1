@@ -11,15 +11,17 @@ class Tweet(models.Model):
 
     def __str__(self):
         return (
-            f'{self.user}' 
-            f'{self.created_at:%Y-%m-%d-%H-%M}' 
+            f'{self.user}'
+            f'{self.created_at:%Y-%m-%d-%H-%M}'
             f'{self.body}...'
         )
+
 
 # Create a User Profile Model
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     follows = models.ManyToManyField("self", related_name='followed_by', symmetrical=False, blank=True)
+    profile_image = models.ImageField(default='default.png', upload_to='images/')
     date_modified = models.DateTimeField(User, auto_now=True)
 
     def __str__(self):
