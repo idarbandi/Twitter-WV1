@@ -1,7 +1,15 @@
-from .models import Tweet
+from .models import Tweet, Profile
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+
+
+class ProfilePicForm(forms.ModelForm):
+    profile_image = forms.ImageField(label="profile_pic")
+
+    class Meta:
+        model = Profile
+        fields = ('profile_image',)
 
 
 class TweetForm(forms.ModelForm):
@@ -64,4 +72,3 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].label = ''
         self.fields[
             'password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
-
