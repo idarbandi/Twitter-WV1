@@ -6,12 +6,23 @@
         <div class="col-8">
             {% for tweet in tweets %}
          <div class="alert alert-dark" role="alert">
-             {{ tweet }}
+             <div class="container">
+                 <div class="row">
+                     <div class="col-2">
+                         <img src="{{ tweet.user.profile.profile_image.url }}" alt="{{ tweet.user.profile.user.username }}" width="50" height="50" class="rounded-circle">
+                     </div>
+                     <div class="col-10">
+             {{ tweet.body }} <br>
              <small class="text-muted">
-                 {{ tweet.created_at }} By @{{ tweet.user.username }}
-             </small>
-         </div><br><br>
-{% endfor %}
+                ({{ tweet.created_at }}) <br> By
+                @ {{tweet.user.username }}
+            </small>
+            <br><br>
+         </div>
+                     </div>
+                 </div>
+             </div>
+     {% endfor %}
         </div>
         <div class="col-4">
     <br><br><br>
@@ -22,8 +33,6 @@
     <button type="submit" class="btn btn-secondary">Send</button>
 </form>
      {% endif %}
-            <br>
-            <a href="{% url 'update_user'%}" class="btn btn-outline-secondary">Update Profile</a>
 </div>
     </div>
 </div>

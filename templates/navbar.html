@@ -16,6 +16,10 @@
         <li class="nav-item">
           <a href="{% url 'logout' %}" class="nav-link">Logout</a>
         </li>
+        <li class="nav-item">
+          <a href="{% url 'update_user'%}" class="nav-link">
+            Update Profile
+          </a></li>
         {% else %}
         <li class="nav-item">
           <a href="{% url 'login' %}" class="nav-link">Login</a>
