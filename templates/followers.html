@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h1>Profile List</h1>
+  <br/>
+  {% if profiles %}
+    {% for profile in profiles.followed_by.all %}
+      <div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ profile.profile_image.url }}" class="img-fluid rounded-start" alt="{{ profile.user.username }}">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ profile.user.username }}
+          {% if profile in profiles.followed_by.all %}
+                <a href="{% url 'unfollow' profile.id %}"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-dash-fill" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M11 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
+  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+</svg> </a>
+              {% else %}
+            <a href="{% url 'follow' profile.id %}"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+  <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+</svg> </a>
+          {% endif %}
+        </h5>
+        <p class="card-text"><a href="{% url 'profile' profile.user.id %}}">@{{ profile.user.username|lower }}</a></p>
+        <p class="card-text"><small class="text-body-secondary">{{ profile.date_modified }}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

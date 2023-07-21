@@ -34,6 +34,19 @@ def profile_list(request):
         return redirect('home')
 
 
+def followers(request, pk):
+    if request.user.is_authenticated:
+        if request.user.id == pk:
+            profile = Profile.objects.get(user_id=pk)
+            return render(request, 'followers.html', {"profiles": profile})
+        else:
+            messages.success(request, ("Wrong Profile Choosen"))
+            return redirect('home')
+    else:
+        messages.success(request, ("You Must Be Logged In To View This Page"))
+        return redirect('home')
+
+
 def profile(request, pk):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user_id=pk)
@@ -144,7 +157,21 @@ def unfollow(request, pk):
         request.user.profile.follows.remove(profile)
         request.user.profile.save()
         messages.success(request, (f'You Unfollwed {profile.user.username}'))
+        return redirect(request.META.get('HTTP_REFERER'))
+
+    else:
+        messages.success(request, ("You Must Be Logged in to View This Page"))
         return redirect('home')
+
+
+def follow(request, pk):
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user_id=pk)
+        # unfollow
+        request.user.profile.follows.add(profile)
+        request.user.profile.save()
+        messages.success(request, (f'You Follwed {profile.user.username}'))
+        return redirect(request.META.get('HTTP_REFERER'))
 
     else:
         messages.success(request, ("You Must Be Logged in to View This Page"))
