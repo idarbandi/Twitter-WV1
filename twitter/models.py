@@ -26,7 +26,11 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     follows = models.ManyToManyField("self", related_name='followed_by', symmetrical=False, blank=True)
     profile_image = models.ImageField(default='default.png', upload_to='images/')
+    bio = models.CharField(blank=True, null=True, max_length=100)
     date_modified = models.DateTimeField(User, auto_now=True)
+    instagram = models.CharField(blank=True, null=True, max_length=100)
+    facebook = models.CharField(blank=True, null=True, max_length=100)
+    linkedin = models.CharField(blank=True, null=True, max_length=100)
 
     def __str__(self):
         return self.user.username

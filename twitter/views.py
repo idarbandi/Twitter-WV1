@@ -122,7 +122,7 @@ def tweet_likes(request, pk):
             tweet.likes.remove(request.user)
         else:
             tweet.likes.add(request.user)
-        return redirect('home')
+        return redirect(request.META('HTTP_REFERER'))
     else:
         messages.success(request, ("You Must Be Logged in to View This Page"))
         return redirect('home')
@@ -134,4 +134,18 @@ def tweet(request, pk):
         return render(request, 'single.html', {'tweet': tweet})
     else:
         messages.success(request, ("Tweet Does Not Exist"))
+        return redirect('home')
+
+
+def unfollow(request, pk):
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user_id=pk)
+        # unfollow
+        request.user.profile.follows.remove(profile)
+        request.user.profile.save()
+        messages.success(request, (f'You Unfollwed {profile.user.username}'))
+        return redirect('home')
+
+    else:
+        messages.success(request, ("You Must Be Logged in to View This Page"))
         return redirect('home')

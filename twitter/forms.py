@@ -6,6 +6,30 @@ from django.contrib.auth.models import User
 
 class ProfilePicForm(forms.ModelForm):
     profile_image = forms.ImageField(label="profile_pic")
+    bio = forms.CharField(label='bio', widget=forms.Textarea(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Bio'
+        }
+    ))
+    instagram = forms.CharField(label='instagram', widget=forms.Textarea(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Instagram'
+        }
+    ))
+    facebook = forms.CharField(label='facebook', widget=forms.Textarea(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Facebook'
+        }
+    ))
+    linkedin = forms.CharField(label='linkedin', widget=forms.Textarea(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Linkedin'
+        }
+    ))
 
     class Meta:
         model = Profile
