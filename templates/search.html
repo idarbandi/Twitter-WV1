@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h1>Search For Tweets</h1>
+<br>
+<form method="post">
+  {% csrf_token %}
+    <input type="text" class="form-control" name="search" placeholder="Tweets, Users, Tags ...">
+  <button type="submit" class="btn btn-secondary w-100"> Search </button>
+</form>
+{% if result %}
+   <h1> Results : </h1>
+   <br><br>
+  {% for tweet in result %}
+         <div class="alert alert-dark" role="alert">
+             <div class="container">
+                 <div class="row">
+                     <div class="col-2">
+                         <img src="{{ tweet.user.profile.profile_image.url }}" alt="{{ tweet.user.profile.user.username }}" width="50" height="50" class="rounded-circle">
+                     </div>
+                     <div class="col-10">
+             {{ tweet.body }} <br>
+             <small class="text-muted">
+                ({{ tweet.created_at }}) <br> By
+                @ {{tweet.user.username }}
+                  {{tweet.like_counts}} Likes
+                 <i> <svg style="color:red" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+</svg> </i>
+
+                 <a class="text-decoration-none" href="{% url 'tweet' tweet.id %}">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
+</svg></a>
+            </small>
+            <br><br>
+         </div>
+                     </div>
+                 </div>
+             </div>
+     {% endfor %}
+{% endif %}
+{% endblock %}

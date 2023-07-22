@@ -47,6 +47,19 @@ def followers(request, pk):
         return redirect('home')
 
 
+def following(request, pk):
+    if request.user.is_authenticated:
+        if request.user.id == pk:
+            profile = Profile.objects.get(user_id=pk)
+            return render(request, 'following.html', {"profiles": profile})
+        else:
+            messages.success(request, ("Wrong Profile Choosen"))
+            return redirect('home')
+    else:
+        messages.success(request, ("You Must Be Logged In To View This Page"))
+        return redirect('home')
+
+
 def profile(request, pk):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user_id=pk)
@@ -176,3 +189,56 @@ def follow(request, pk):
     else:
         messages.success(request, ("You Must Be Logged in to View This Page"))
         return redirect('home')
+
+
+def delete_tweets(request, pk):
+    if request.user.is_authenticated:
+        tweet = get_object_or_404(Tweet, id=pk)
+        if tweet:
+            if request.user == tweet.user:
+                tweet.delete()
+                messages.success(request, ("Tweet Deleted Successfully"))
+                return redirect(request.META.get('HTTP_REFERER'))
+            else:
+                messages.success(request, ("You Are Not Authorized For This Action"))
+                return redirect('home')
+        else:
+            messages.success(request, ("Tweet was Not Found"))
+            return redirect('home')
+    else:
+        messages.success(request, ("You Must Be Logged in To View This Page"))
+        return redirect(request.META.get('HTTP_REFERER'))
+
+
+def edit_tweets(request, pk):
+    if request.user.is_authenticated:
+        tweet = get_object_or_404(Tweet, id=pk)
+        if tweet:
+            if request.user == tweet.user:
+                form = TweetForm(request.POST or None, instance=tweet)
+                if request.method == 'POST':
+                    if form.is_valid():
+                        tweet = form.save(commit=False)
+                        tweet.user = request.user
+                        tweet.save()
+                        messages.success(request, ("Tweet Edited Successfully"))
+                        return redirect(request.META.get('HTTP_REFERER'))
+                else:
+                    return render(request, 'edit_tweets.html', {'form': form, "tweet": tweet})
+            else:
+                messages.success(request, ("You Are Not Authorized For This Action"))
+                return redirect('home')
+        else:
+            return redirect('home')
+            messages.success(request, ("Tweet was Not Found"))
+    else:
+        messages.success(request, ("You Must Be Logged in To View This Page"))
+        return redirect('home')
+
+
+def search(request):
+    if request.method == 'POST':
+        search = Tweet.objects.filter(body__icontains=request.POST['search'])
+        return render(request, 'search.html', {'result': search})
+    else:
+        return render(request, 'search.html', {})

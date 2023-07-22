@@ -6,6 +6,7 @@ urlpatterns = [
     path('profile_list', views.profile_list, name='profile_list'),
     path('profile/<int:pk>', views.profile, name='profile'),
     path('profile/followers/<int:pk>', views.followers, name='followers'),
+    path('profile/following/<int:pk>', views.following, name='following'),
     path('login', views.login_user, name='login'),
     path('logout', views.logout_user, name='logout'),
     path('register', views.register, name='register'),
@@ -13,5 +14,8 @@ urlpatterns = [
     path('tweet_likes/<int:pk>', views.tweet_likes, name='tweet_likes'),
     path('tweet/<int:pk>', views.tweet, name='tweet'),
     path('unfollow/<int:pk>', views.unfollow, name='unfollow'),
-    path('follow/<int:pk>', views.follow, name='follow')
+    path('follow/<int:pk>', views.follow, name='follow'),
+    path('delete_tweets/<int:pk>', views.delete_tweets, name='delete_tweets' ),
+    path('edit_tweets/<int:pk>', views.edit_tweets, name='edit_tweets' ),
+    path('search', views.search, name='logout'),
 ]
