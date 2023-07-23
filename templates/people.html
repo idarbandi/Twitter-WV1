@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h1>Find People</h1>
+<br>
+<form method="post">
+  {% csrf_token %}
+    <input type="text" class="form-control" name="search" placeholder="Tweets, Users, Tags ...">
+  <button type="submit" class="btn btn-secondary w-100"> Search </button>
+</form>
+{% if profiles %}
+   <h1> Results : </h1>
+   <br><br>
+    {% for profile in profiles%}
+      <div class="card mb-3" style="max-width: 540px;">
+  <div class="row">
+    <div class="col">
+      <img src="{{ profile.profile.profile_image.url }}" class="img-fluid rounded-start" alt="{{ profile.profile.username }}">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ profile.username }}</h5>
+        <p class="card-text"><a href="{% url 'profile' profile.id %}}">@{{ profile.username }}</a></p>
+        <p class="card-text"><small class="text-body-secondary">{{ profile.profile.date_modified }}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+
+{% else %}
+
+  <h1 class="mt-5">Sorry ! No Result </h1>
+
+{% endif %}
+{% endblock %}

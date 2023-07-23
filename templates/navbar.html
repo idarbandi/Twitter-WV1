@@ -9,6 +9,9 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'profile_list' %}">Profiles List</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'people' %}">Find People</a>
+        </li>
         {% if request.user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'profile' request.user.id %}">My Profile</a>

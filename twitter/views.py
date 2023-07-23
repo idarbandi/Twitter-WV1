@@ -242,3 +242,11 @@ def search(request):
         return render(request, 'search.html', {'result': search})
     else:
         return render(request, 'search.html', {})
+
+
+def people(request):
+    if request.method == 'POST':
+        search = User.objects.filter(username__icontains=request.POST['search'])
+        return render(request, 'people.html', {'profiles': search})
+    else:
+        return render(request, 'people.html', {})
