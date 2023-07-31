@@ -53,7 +53,8 @@ WSGI_APPLICATION = 'Social.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join('db.sqlite3')
     }
 }
 

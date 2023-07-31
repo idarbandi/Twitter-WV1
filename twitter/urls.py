@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.home , name='home'),
+    path('', views.home, name='home'),
     path('profile_list', views.profile_list, name='profile_list'),
     path('profile/<int:pk>', views.profile, name='profile'),
     path('profile/followers/<int:pk>', views.followers, name='followers'),
@@ -15,8 +15,8 @@ urlpatterns = [
     path('tweet/<int:pk>', views.tweet, name='tweet'),
     path('unfollow/<int:pk>', views.unfollow, name='unfollow'),
     path('follow/<int:pk>', views.follow, name='follow'),
-    path('delete_tweets/<int:pk>', views.delete_tweets, name='delete_tweets' ),
-    path('edit_tweets/<int:pk>', views.edit_tweets, name='edit_tweets' ),
-    path('search', views.search, name='logout'),
+    path('delete_tweets/<int:pk>', views.delete_tweets, name='delete_tweets'),
+    path('edit_tweets/<int:pk>', views.edit_tweets, name='edit_tweets'),
+    path('search', views.search, name='search'),
     path('find_people', views.people, name='people')
 ]

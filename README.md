@@ -87,8 +87,8 @@ search for people around you
 
 ## Demo
 
-media/screenshots/Screenshot from 2023-07-23 17-18-45.png
+<img src="https://github.com/idarbandi/Twitter-WV1/blob/650cd3db7b94589d898eb6fa62883890bc96f533/media/screenshots/Screenshot%20from%202023-07-23%2017-18-45.png">
+<img src="https://github.com/idarbandi/Twitter-WV1/blob/650cd3db7b94589d898eb6fa62883890bc96f533/media/screenshots/Screenshot%20from%202023-07-23%2017-19-36.png">
 
-media/screenshots/Screenshot from 2023-07-23 17-19-36.png
 
 
